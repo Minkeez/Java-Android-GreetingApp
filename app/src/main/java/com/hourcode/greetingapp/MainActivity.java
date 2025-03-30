@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TextView greetingText;
     RecyclerView greetingRecycler;
     GreetingAdapter adapter;
+    Button clearHistoryBtn;
 
     List<String> greetingList;
     SharedPreferences prefs;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         greetingText = findViewById(R.id.greetingText);
         greetingRecycler = findViewById(R.id.greetingHistoryRecyclerView);
+        clearHistoryBtn = findViewById(R.id.clearHistoryBtn);
 
         // Set up SharedPreferences
         prefs = getSharedPreferences("GreetingAppPrefs", Context.MODE_PRIVATE);
@@ -95,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
                 greetingList.add(0, message); // Add to top
                 adapter.notifyItemInserted(0);
                 saveGreetings(greetingList);
+            }
+        });
+
+        clearHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                greetingList.clear();
+                adapter.notifyDataSetChanged();
+                prefs.edit().remove(PREF_KEY).apply();
+                Toast.makeText(MainActivity.this, "Greeting history cleared", Toast.LENGTH_SHORT).show();
             }
         });
     }

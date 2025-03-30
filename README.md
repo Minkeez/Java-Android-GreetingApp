@@ -39,7 +39,6 @@ GreetingApp is a simple and fun Android app built using **Java** that greets use
 
 ### 📸 Screenshots
 ![Main Screen](images/main_screen.png)
-![Greeting History](images/history.png)
 
 ---
 
